@@ -1,67 +1,42 @@
 <?php
-include_once("servidor.php");
+include("../servidor.php");
 ?>
 
 <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+        <title>Document</title>
+    </head>
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    
-    <title>Document</title>
-</head>
-<body>
-<div class="container mt-5">
-<table class="table table-bordered">
-
-      
-    <?php
-     // query para exibir o livros 
-
-    $sql = "SELECT  cod_liv, titulo_liv, valor_liv, img_liv
-     FROM  tb_livro;";
-
-   // EXECUTAR
-    $resp =   mysqli_query($banco , $sql);
-
-    // exibir os itens do banco
-    $coluna = 0;
-
-    while( $tabela = mysqli_fetch_array($resp)){
-        if($coluna == 0 ){
-            echo "<tr>";
-        }
-        if($coluna < 4){
-        echo " <td >
-           <p> 
-             <img src='adm/".$tabela["img_liv"] ."'>
-           </p>
-            <h3>". $tabela["titulo_liv"] ." </h3>
-            <p>". number_format($tabela["valor_liv"],2, ",",".") 
-             ."</p>
-       
-              <a href='detalhe.php?cod_liv=".$tabela["cod_liv"]."'>
-              Detalhe</a>
-           </td>";
-           $coluna++;
-        }else{
-            echo "</tr>";
-            $coluna = 0;
-        }
-
-    }
-
-?>
-   
-
-</table>
-
-</div>
-
-<script src="../js/jquery-3.5.1.slim.min.js"></script>
-<script src="../js/popper.min.js"></script>
-
-</body>
+    <body>
+        <div class="container">
+            <div class="row pt-5">  
+                <div class="col-md-4 "></div> 
+                <section class="col-md-4">
+                    <form action="procLogin.php" method="post">
+                        <fieldset>
+                            <legend>Identifique</legend>                        
+                            <div>
+                                <label for="login"> Login :</label>
+                                <input type="text" class="form-control" name="login"  id="login">
+                            </div>                        
+                            <div>
+                                <label for="senha"> Senha :</label>
+                                <input type="password" class="form-control" name="senha"  id="senha">
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Acesso</button>
+                        </fieldset>
+                    </form>
+                </section>
+            <section class="col-4"></section> 
+        </div>
+        </div>
+    </body>
+    <script src="../js/jquery-3.5.1.slim.min.js" ></script>
+    <script src="../js/popper.min.js" ></script>
 </html>
